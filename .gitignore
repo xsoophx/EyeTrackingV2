@@ -1,0 +1,9 @@
+# idea
+.idea/*
+!.idea/codeStyles/
+
+# macOS
+.DS_Store
+
+# cpp
+*build*/
