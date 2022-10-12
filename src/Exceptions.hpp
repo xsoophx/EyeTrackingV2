@@ -13,11 +13,5 @@ struct BaseException: std::runtime_error
     explicit BaseException(QString const &message);
 };
 
-struct ConfigLoadingException final: BaseException
-{
-    using BaseException::BaseException;
-    using BaseException::operator=;
-};
-
 
 #endif //EXCEPTIONS_HPP

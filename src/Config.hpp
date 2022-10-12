@@ -9,40 +9,26 @@
 #include <QtGui/QColor>
 #include <QtCore/QString>
 
+#include "config/General.hpp"
+
 
 struct Config
 {
     static QString const GENERAL;
-    enum class Tool
-    {
-        BubbleView,
-        ZoomMaps,
-        CodeCharts,
-        EyeTracking,
-        DataClient,
-    };
+    static QString const BUBBLE_VIEW;
+    static QString const CODE_CHARTS;
+    static QString const ZOOM_MAPS;
+    static QString const DATA_CLIENT;
+
+    using General = config::General;
+    using Tool = General::Tool;
+    General general;
 
     struct Dimensions
     {
         quint16 width;
         quint16 height;
     };
-
-    struct General
-    {
-        struct FullScreen
-        {
-        };
-
-        using DisplayMode =  std::variant<FullScreen, Dimensions>;
-
-        DisplayMode displayMode;
-        std::optional<Tool> activatedTool;
-        QString masterPath;
-        QString exportPath;
-        QString imagePath;
-
-    } general;
 
     struct BubbleView
     {
@@ -64,6 +50,12 @@ struct Config
             QString name;
             struct Filter
             {
+                static QString const GRADIENT;
+                static QString const FILTER_TYPE;
+                static QString const INTENSITY;
+                static QString const SHAPE;
+                static QString const SIZE;
+
                 quint16 gradient;
                 FilterType type;
                 quint16 intensity;
@@ -81,6 +73,13 @@ struct Config
     {
         struct KeyBindings
         {
+            static QString const UP;
+            static QString const DOWN;
+            static QString const LEFT;
+            static QString const RIGHT;
+            static QString const IN;
+            static QString const OUT;
+
             QChar up;
             QChar down;
             QChar left;
@@ -91,9 +90,15 @@ struct Config
 
         struct ZoomMapsPicture
         {
+            static QString const NAME;
+            static QString const ZOOM_SPEED;
+
             QString name;
             double zoomSpeed;
         };
+
+        static QString const KEY_BINDINGS;
+        static QString const PICTURES;
 
         KeyBindings keyBindings;
         std::vector<ZoomMapsPicture> pictures;

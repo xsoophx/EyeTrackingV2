@@ -17,6 +17,9 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5 COMPONENTS Core Gui REQUIRED)
 
 add_library(EyeTrackingV2_impl STATIC
+        src/config/General.cpp src/config/General.hpp
+        src/config/Helpers.hpp
+        src/config/Exceptions.hpp
         src/Config.cpp src/Config.hpp
         src/Exceptions.cpp src/Exceptions.hpp)
 target_link_libraries(EyeTrackingV2_impl PUBLIC Qt5::Core Qt5::Gui)
