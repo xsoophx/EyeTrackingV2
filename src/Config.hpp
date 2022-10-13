@@ -10,6 +10,8 @@
 #include <QtCore/QString>
 
 #include "config/General.hpp"
+#include "config/BubbleView.hpp"
+#include "config/ZoomMaps.hpp"
 
 
 struct Config
@@ -21,88 +23,20 @@ struct Config
     static QString const DATA_CLIENT;
 
     using General = config::General;
+    using BubbleView = config::BubbleView;
+    using ZoomMaps = config::ZoomMaps;
+
     using Tool = General::Tool;
+
     General general;
+    BubbleView bubbleView;
+    ZoomMaps zoomMaps;
 
     struct Dimensions
     {
         quint16 width;
         quint16 height;
     };
-
-    struct BubbleView
-    {
-        struct BubbleViewPicture
-        {
-            enum class FilterType
-            {
-                GaussianBlur,
-                Pixelate,
-                LinearMovement
-            };
-
-            enum class Shape
-            {
-                Circle,
-                Square
-            };
-
-            QString name;
-            struct Filter
-            {
-                static QString const GRADIENT;
-                static QString const FILTER_TYPE;
-                static QString const INTENSITY;
-                static QString const SHAPE;
-                static QString const SIZE;
-
-                quint16 gradient;
-                FilterType type;
-                quint16 intensity;
-                Shape shape;
-                quint16 size;
-
-            } filter;
-
-        };
-
-        std::vector<BubbleViewPicture> pictures;
-    } bubbleView;
-
-    struct ZoomMaps
-    {
-        struct KeyBindings
-        {
-            static QString const UP;
-            static QString const DOWN;
-            static QString const LEFT;
-            static QString const RIGHT;
-            static QString const IN;
-            static QString const OUT;
-
-            QChar up;
-            QChar down;
-            QChar left;
-            QChar right;
-            QChar in;
-            QChar out;
-        };
-
-        struct ZoomMapsPicture
-        {
-            static QString const NAME;
-            static QString const ZOOM_SPEED;
-
-            QString name;
-            double zoomSpeed;
-        };
-
-        static QString const KEY_BINDINGS;
-        static QString const PICTURES;
-
-        KeyBindings keyBindings;
-        std::vector<ZoomMapsPicture> pictures;
-    } zoomMaps;
 
     struct CodeCharts
     {
