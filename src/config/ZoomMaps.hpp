@@ -2,8 +2,10 @@
 #define CONFIG_ZOOMMAPS_HPP
 
 #include <QtCore/QString>
-#include <QtCore/QJsonObject>
+
 #include <vector>
+
+class QJsonObject;
 
 namespace config
 {

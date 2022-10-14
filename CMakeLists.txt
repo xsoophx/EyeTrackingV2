@@ -17,11 +17,14 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5 COMPONENTS Core Gui REQUIRED)
 
 add_library(EyeTrackingV2_impl STATIC
+        src/Exceptions.cpp src/Exceptions.hpp
+        src/Config.cpp src/Config.hpp
         src/config/General.cpp src/config/General.hpp
+        src/config/BubbleView.cpp src/config/BubbleView.hpp
+        src/config/ZoomMaps.cpp src/config/ZoomMaps.hpp
         src/config/Helpers.hpp
         src/config/Exceptions.hpp
-        src/Config.cpp src/Config.hpp
-        src/Exceptions.cpp src/Exceptions.hpp src/config/BubbleView.cpp src/config/BubbleView.hpp src/config/ZoomMaps.cpp src/config/ZoomMaps.hpp)
+        )
 target_link_libraries(EyeTrackingV2_impl PUBLIC Qt5::Core Qt5::Gui)
 
 add_executable(EyeTrackingV2 src/main.cpp)
