@@ -1,5 +1,6 @@
 #include <doctest/doctest.h>
 
-TEST_CASE(""){
+TEST_CASE("ConfigReader")
+{
 
 }

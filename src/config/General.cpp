@@ -13,7 +13,7 @@ General::DisplayMode displayModeFromJson(QJsonValue const &value)
     static QString const height = "height";
     static QString const width = "width";
 
-    if (!value.isString() && value.toString() == "fullScreen")
+    if (value.isString() && value.toString() == "fullScreen")
         return General::FullScreen{};
 
     if (value.isObject()) {

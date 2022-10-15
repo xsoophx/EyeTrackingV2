@@ -54,13 +54,6 @@ QJsonObject getSubConfig(QJsonObject const &parent, QString const &name)
         throw config::LoadingException{QStringLiteral("%1 is missing or not an object.").arg(name)};
     return parent[name].toObject();
 }
-
-void checkObjectForKey(QJsonObject const &object, QString const &key)
-{
-    if (!object.contains(key))
-        throw config::LoadingException{
-            QStringLiteral("Could not find required component: {}").arg(key)};
-}
 }
 
 Config Config::load(QString const &path)
