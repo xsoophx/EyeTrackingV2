@@ -1,5 +1,4 @@
 #include "General.hpp"
-#include "Helpers.hpp"
 
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonValue>
@@ -20,7 +19,7 @@ General::DisplayMode displayModeFromJson(QJsonValue const &value)
         auto const object = value.toObject();
         checkObjectForKeys(object, height, width);
 
-        return General::Dimensions{
+        return Dimensions{
             .width = static_cast<quint16>(object[width].toInt()),
             .height = static_cast<quint16>(object[height].toInt()),
         };

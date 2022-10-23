@@ -10,15 +10,33 @@
 
 namespace config
 {
-struct ObjectComponents
+struct Dimensions
+{
+    quint16 width;
+    quint16 height;
+};
+
+struct ObjectComponents final
 {
     QString parentName;
     std::vector<QString> strings;
     std::vector<QString> ints;
+    std::vector<QString> booleans;
 
-    ObjectComponents(QString parentName, std::vector<QString> strings, std::vector<QString> ints)
-        : parentName{std::move(parentName)}, strings{std::move(strings)}, ints{std::move(ints)}
+    ObjectComponents(QString parentName,
+                     std::vector<QString> strings,
+                     std::vector<QString> ints,
+                     std::vector<QString> booleans)
+        : parentName{std::move(parentName)},
+          strings{std::move(strings)},
+          ints{std::move(ints)},
+          booleans(std::move(booleans))
     {}
+
+    static ObjectComponents createStringsOnly(QString parentName, std::vector<QString> strings)
+    {
+        return {std::move(parentName), std::move(strings), {}, {}};
+    }
 
     void checkComponentsByParent(QJsonObject const &parent) const
     {
@@ -33,6 +51,12 @@ struct ObjectComponents
                 !parent[value].isDouble() || std::floor(doubleValue) != doubleValue)
                 throw config::LoadingException{
                     QStringLiteral("%1 of parent %2 is not a integer.").arg(value, parentName)};
+        }
+
+        for (auto const &value: booleans) {
+            if (!parent[value].isBool())
+                throw config::LoadingException{
+                    QStringLiteral("%1 of parent %2 is not a boolean value.").arg(value, parentName)};
         }
     }
 };

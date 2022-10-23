@@ -1,49 +1,17 @@
 #include "Config.hpp"
-#include "config/Exceptions.hpp"
-#include "config/ZoomMaps.hpp"
-
 
 #include <QtCore/QFile>
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 
-// General
 QString const Config::GENERAL{"general"};
 
 QString const Config::BUBBLE_VIEW{"bubbleView"};
 
-// BubbleView
-QString const Config::BubbleView::BubbleViewPicture::Filter::FILTER_TYPE{"type"};
+QString const Config::ZOOM_MAPS{"zoomMaps"};
 
-QString const Config::BubbleView::BubbleViewPicture::Filter::GRADIENT{"gradient"};
-
-QString const Config::BubbleView::BubbleViewPicture::Filter::INTENSITY{"intensity"};
-
-QString const Config::BubbleView::BubbleViewPicture::Filter::SHAPE{"shape"};
-
-QString const Config::BubbleView::BubbleViewPicture::Filter::SIZE{"size"};
-
-// ZoomMaps
-QString const Config::ZoomMaps::KEY_BINDINGS{"keyBindings"};
-
-QString const Config::ZoomMaps::PICTURES{"pictures"};
-
-QString const Config::ZoomMaps::KeyBindings::UP{"up"};
-
-QString const Config::ZoomMaps::KeyBindings::DOWN{"down"};
-
-QString const Config::ZoomMaps::KeyBindings::LEFT{"left"};
-
-QString const Config::ZoomMaps::KeyBindings::RIGHT{"right"};
-
-QString const Config::ZoomMaps::KeyBindings::IN{"in"};
-
-QString const Config::ZoomMaps::KeyBindings::OUT{"out"};
-
-QString const Config::ZoomMaps::ZoomMapsPicture::NAME{"name"};
-
-QString const Config::ZoomMaps::ZoomMapsPicture::ZOOM_SPEED{"zoomSpeed"};
+QString const Config::CODE_CHARTS{"codeCharts"};
 
 namespace
 {
@@ -71,6 +39,7 @@ Config Config::load(QString const &path)
         .general = General::load(getSubConfig(config, Config::GENERAL)),
         .bubbleView = BubbleView::load(getSubConfig(config, Config::BUBBLE_VIEW)),
         .zoomMaps = ZoomMaps::load(getSubConfig(config, Config::ZOOM_MAPS)),
+        .codeCharts = CodeCharts::load(getSubConfig(config, Config::CODE_CHARTS))
 
     };
 }

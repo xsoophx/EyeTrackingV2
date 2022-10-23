@@ -1,17 +1,18 @@
 #ifndef CONFIG_HPP
 #define CONFIG_HPP
 
+#include "config/BubbleView.hpp"
+#include "config/CodeCharts.hpp"
+#include "config/General.hpp"
+#include "config/ZoomMaps.hpp"
+
 #include <optional>
 #include <variant>
 #include <vector>
 
+#include <QtCore/QString>
 #include <QtGlobal>
 #include <QtGui/QColor>
-#include <QtCore/QString>
-
-#include "config/General.hpp"
-#include "config/BubbleView.hpp"
-#include "config/ZoomMaps.hpp"
 
 
 struct Config
@@ -25,44 +26,14 @@ struct Config
     using General = config::General;
     using BubbleView = config::BubbleView;
     using ZoomMaps = config::ZoomMaps;
+    using CodeCharts = config::CodeCharts;
 
     using Tool = General::Tool;
 
     General general;
     BubbleView bubbleView;
     ZoomMaps zoomMaps;
-
-    struct Dimensions
-    {
-        quint16 width;
-        quint16 height;
-    };
-
-    struct CodeCharts
-    {
-        struct StringCharacters
-        {
-            bool upperCase;
-            bool lowerCase;
-            bool numbers;
-        };
-
-        struct CodeChartsPicture
-        {
-            QString name;
-            Dimensions grid;
-            quint16 pictureViewTime;
-            bool relative;
-            quint16 maxRecursionDepth;
-
-        };
-
-        quint16 matrixViewTime;
-        quint16 minViewsToSubdivide;
-        bool ordered;
-        StringCharacters stringCharacters;
-        std::vector<CodeChartsPicture> pictures;
-    } codeCharts;
+    CodeCharts codeCharts;
 
     struct EyeTracking
     {

@@ -46,6 +46,7 @@ struct BubbleView
 
     };
 
+    static QString const PICTURES;
     std::vector<BubbleViewPicture> pictures;
 };
 }

@@ -9,7 +9,8 @@ namespace
 {
 using namespace config;
 using BubbleViewFilter = BubbleView::BubbleViewPicture::Filter;
-
+using BubbleViewFilterType = BubbleView::BubbleViewPicture::FilterType;
+using BubbleViewShape = BubbleView::BubbleViewPicture::Shape;
 
 BubbleView::BubbleViewPicture::Filter filterFromJson(QJsonValue const &value)
 {
@@ -18,7 +19,7 @@ BubbleView::BubbleViewPicture::Filter filterFromJson(QJsonValue const &value)
 
     auto const object = value.toObject();
 
-    ObjectComponents
+    ObjectComponents const
         components{"filter",
                    {BubbleViewFilter::SHAPE},
                    {
@@ -26,35 +27,36 @@ BubbleView::BubbleViewPicture::Filter filterFromJson(QJsonValue const &value)
                        BubbleViewFilter::INTENSITY,
                        BubbleViewFilter::SIZE,
                        BubbleViewFilter::FILTER_TYPE
-                   }
+                   },
+                   {}
     };
     components.checkComponentsByParent(object);
 
-    static QMap<QString, BubbleView::BubbleViewPicture::FilterType> const filterTypes{
-        {"gaussianBlur", BubbleView::BubbleViewPicture::FilterType::GaussianBlur},
-        {"pixelate", BubbleView::BubbleViewPicture::FilterType::Pixelate},
-        {"linearMovement", BubbleView::BubbleViewPicture::FilterType::LinearMovement}};
+    static QMap<QString, BubbleViewFilterType> const filterTypes{
+        {"gaussianBlur", BubbleViewFilterType::GaussianBlur},
+        {"pixelate", BubbleViewFilterType::Pixelate},
+        {"linearMovement", BubbleViewFilterType::LinearMovement}};
 
     static QMap<QString, BubbleView::BubbleViewPicture::Shape> const shapeTypes{
-        {"circle", BubbleView::BubbleViewPicture::Shape::Circle},
-        {"square", BubbleView::BubbleViewPicture::Shape::Square}};
+        {"circle", BubbleViewShape::Circle},
+        {"square", BubbleViewShape::Square}};
 
     checkObjectForKeys(object,
-                       BubbleView::BubbleViewPicture::Filter::FILTER_TYPE,
-                       BubbleView::BubbleViewPicture::Filter::SHAPE);
+                       BubbleViewFilter::FILTER_TYPE,
+                       BubbleViewFilter::SHAPE);
 
     auto const filterType =
-        filterTypes.find(value[BubbleView::BubbleViewPicture::Filter::FILTER_TYPE].toString()).value();
+        filterTypes.find(value[BubbleViewFilter::FILTER_TYPE].toString()).value();
     auto const
-        shapeType = shapeTypes.find(value[BubbleView::BubbleViewPicture::Filter::SHAPE].toString()).value();
+        shapeType = shapeTypes.find(value[BubbleViewFilter::SHAPE].toString()).value();
 
 
     return BubbleView::BubbleViewPicture::Filter{
-        .gradient = static_cast<quint16>(value[BubbleView::BubbleViewPicture::Filter::GRADIENT].toInt()),
+        .gradient = static_cast<quint16>(value[BubbleViewFilter::GRADIENT].toInt()),
         .type = filterType,
-        .intensity = static_cast<quint16>(value[BubbleView::BubbleViewPicture::Filter::INTENSITY].toInt()),
+        .intensity = static_cast<quint16>(value[BubbleViewFilter::INTENSITY].toInt()),
         .shape = shapeType,
-        .size = static_cast<quint16>(value[BubbleView::BubbleViewPicture::Filter::SIZE].toInt()),
+        .size = static_cast<quint16>(value[BubbleViewFilter::SIZE].toInt()),
 
     };
 
@@ -82,13 +84,25 @@ std::vector<BubbleView::BubbleViewPicture> bubbleViewPicturesFromJsonArray(QJson
 
 namespace config
 {
+QString const BubbleView::PICTURES{"pictures"};
+
+QString const BubbleViewFilter::FILTER_TYPE{"type"};
+
+QString const BubbleViewFilter::GRADIENT{"gradient"};
+
+QString const BubbleViewFilter::INTENSITY{"intensity"};
+
+QString const BubbleViewFilter::SHAPE{"shape"};
+
+QString const BubbleViewFilter::SIZE{"size"};
+
 BubbleView BubbleView::load(QJsonObject const &bubbleView)
 {
-    if (!bubbleView["pictures"].isArray())
+    if (!bubbleView[PICTURES].isArray())
         throw LoadingException{"pictures of Bubble View is not an array."};
 
     return {
-        .pictures = bubbleViewPicturesFromJsonArray(bubbleView["pictures"].toArray())
+        .pictures = bubbleViewPicturesFromJsonArray(bubbleView[PICTURES].toArray())
     };
 }
 }

@@ -1,6 +1,8 @@
 #ifndef CONFIG_GENERAL_HPP
 #define CONFIG_GENERAL_HPP
 
+#include "Helpers.hpp"
+
 #include <optional>
 #include <variant>
 
@@ -27,11 +29,6 @@ struct General
     {
     };
 
-    struct Dimensions
-    {
-        quint16 width;
-        quint16 height;
-    };
 
     using DisplayMode = std::variant<FullScreen, Dimensions>;
 

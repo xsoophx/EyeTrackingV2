@@ -52,8 +52,8 @@ std::vector<ZoomMaps::ZoomMapsPicture> zoomMapsPicturesFromJsonArray(QJsonArray 
                                    .arg(index++)};
 
                        return ZoomMaps::ZoomMapsPicture{
-                           .name = value["name"].toString(),
-                           .zoomSpeed = value["zoomSpeed"].toDouble()
+                           .name = value[ZoomMaps::ZoomMapsPicture::NAME].toString(),
+                           .zoomSpeed = value[ZoomMaps::ZoomMapsPicture::ZOOM_SPEED].toDouble()
                        };
                    });
 
@@ -63,6 +63,26 @@ std::vector<ZoomMaps::ZoomMapsPicture> zoomMapsPicturesFromJsonArray(QJsonArray 
 
 namespace config
 {
+QString const ZoomMaps::KEY_BINDINGS{"keyBindings"};
+
+QString const ZoomMaps::PICTURES{"pictures"};
+
+QString const ZoomMaps::KeyBindings::UP{"up"};
+
+QString const ZoomMaps::KeyBindings::DOWN{"down"};
+
+QString const ZoomMaps::KeyBindings::LEFT{"left"};
+
+QString const ZoomMaps::KeyBindings::RIGHT{"right"};
+
+QString const ZoomMaps::KeyBindings::IN{"in"};
+
+QString const ZoomMaps::KeyBindings::OUT{"out"};
+
+QString const ZoomMaps::ZoomMapsPicture::NAME{"name"};
+
+QString const ZoomMaps::ZoomMapsPicture::ZOOM_SPEED{"zoomSpeed"};
+
 ZoomMaps ZoomMaps::load(QJsonObject const &zoomMaps)
 {
     checkObjectForKeys(zoomMaps, ZoomMaps::KEY_BINDINGS, ZoomMaps::PICTURES);
