@@ -10,6 +10,8 @@
 
 namespace config
 {
+bool isInt(QJsonValue const &value);
+
 struct Dimensions
 {
     quint16 width;
@@ -47,8 +49,7 @@ struct ObjectComponents final
         }
 
         for (auto const &value: ints) {
-            if (auto const doubleValue = parent[value].toDouble();
-                !parent[value].isDouble() || std::floor(doubleValue) != doubleValue)
+            if (!isInt(parent[value]))
                 throw config::LoadingException{
                     QStringLiteral("%1 of parent %2 is not a integer.").arg(value, parentName)};
         }
@@ -60,6 +61,13 @@ struct ObjectComponents final
         }
     }
 };
+
+bool isInt(QJsonValue const &value)
+{
+    auto const doubleValue = value.toDouble();
+    return !value.isDouble() || std::floor(doubleValue) != doubleValue;
+
+}
 
 template<typename... KeyTypes>
 auto checkObjectForKeys(QJsonObject const &object, KeyTypes const &... keys)

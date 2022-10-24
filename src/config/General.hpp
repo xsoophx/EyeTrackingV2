@@ -29,7 +29,6 @@ struct General
     {
     };
 
-
     using DisplayMode = std::variant<FullScreen, Dimensions>;
 
     DisplayMode displayMode;

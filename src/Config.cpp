@@ -13,6 +13,12 @@ QString const Config::ZOOM_MAPS{"zoomMaps"};
 
 QString const Config::CODE_CHARTS{"codeCharts"};
 
+QString const Config::EYE_TRACKING{"eyeTracking"};
+
+QString const Config::DATA_CLIENT{"dataClient"};
+
+QString const Config::DATABASE{"database"};
+
 namespace
 {
 
@@ -35,11 +41,14 @@ Config Config::load(QString const &path)
         throw config::LoadingException{"Document is not an object."};
 
     auto const config{document.object()};
+
     return Config{
         .general = General::load(getSubConfig(config, Config::GENERAL)),
         .bubbleView = BubbleView::load(getSubConfig(config, Config::BUBBLE_VIEW)),
         .zoomMaps = ZoomMaps::load(getSubConfig(config, Config::ZOOM_MAPS)),
-        .codeCharts = CodeCharts::load(getSubConfig(config, Config::CODE_CHARTS))
-
+        .codeCharts = CodeCharts::load(getSubConfig(config, Config::CODE_CHARTS)),
+        .eyeTracking = EyeTracking::load(getSubConfig(config, Config::EYE_TRACKING)),
+        .dataClient = DataClient::load(getSubConfig(config, Config::DATA_CLIENT)),
+        .database = Database::load(getSubConfig(config, Config::DATABASE))
     };
 }
