@@ -10,8 +10,13 @@
 
 namespace config
 {
-bool isInt(QJsonValue const &value);
 
+inline bool isInt(QJsonValue const &value)
+{
+    auto const doubleValue = value.toDouble();
+    return !value.isDouble() || std::floor(doubleValue) != doubleValue;
+
+}
 struct Dimensions
 {
     quint16 width;
@@ -61,13 +66,6 @@ struct ObjectComponents final
         }
     }
 };
-
-bool isInt(QJsonValue const &value)
-{
-    auto const doubleValue = value.toDouble();
-    return !value.isDouble() || std::floor(doubleValue) != doubleValue;
-
-}
 
 template<typename... KeyTypes>
 auto checkObjectForKeys(QJsonObject const &object, KeyTypes const &... keys)

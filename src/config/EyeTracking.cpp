@@ -33,6 +33,8 @@ std::vector<EyeTrackingPicture> eyeTrackingPicturesFromJsonArray(QJsonArray cons
                        };
                    }
     );
+
+    return result;
 }
 }
 

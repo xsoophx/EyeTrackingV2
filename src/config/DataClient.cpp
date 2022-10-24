@@ -30,6 +30,8 @@ std::vector<QColor> colorsFromJsonArray(QJsonArray const &colors)
 
                        return QColor{value[RED].toInt(), value[GREEN].toInt(), value[BLUE].toInt()};
                    });
+
+    return result;
 }
 }
 
