@@ -10,9 +10,6 @@ using namespace config;
 std::vector<QColor> colorsFromJsonArray(QJsonArray const &colors)
 {
     std::vector<QColor> result(colors.size());
-    static QString const RED{"r"};
-    static QString const GREEN{"g"};
-    static QString const BLUE{"b"};
 
     std::transform(colors.begin(),
                    colors.end(),
@@ -20,15 +17,16 @@ std::vector<QColor> colorsFromJsonArray(QJsonArray const &colors)
                    [index = size_t{0}](QJsonValue const &value) mutable
                    {
                        if (!value.isObject()
-                           || !isInt(value[RED])
-                           || !isInt(value[GREEN])
-                           || !isInt(value[BLUE]))
+                           || !isInt(value[DataClient::RED])
+                           || !isInt(value[DataClient::GREEN])
+                           || !isInt(value[DataClient::BLUE]))
                            throw config::LoadingException{
                                QStringLiteral(
                                    "%1 of Data Client colors contains invalid RGB value.")
                                    .arg(index++)};
 
-                       return QColor{value[RED].toInt(), value[GREEN].toInt(), value[BLUE].toInt()};
+                       return QColor{value[DataClient::RED].toInt(), value[DataClient::GREEN].toInt(),
+                                     value[DataClient::BLUE].toInt()};
                    });
 
     return result;
@@ -38,6 +36,12 @@ std::vector<QColor> colorsFromJsonArray(QJsonArray const &colors)
 namespace config
 {
 QString const DataClient::COLOR_SAMPLE_BOARD{"colorSampleBoard"};
+
+QString const DataClient::RED{"r"};
+
+QString const DataClient::GREEN{"g"};
+
+QString const DataClient::BLUE{"b"};
 
 DataClient DataClient::load(QJsonObject const &dataClient)
 {

@@ -12,7 +12,7 @@ class QJsonObject;
 
 namespace config
 {
-struct General
+struct General final
 {
     static General load(QJsonObject const &general);
 
@@ -25,7 +25,7 @@ struct General
         DataClient,
     };
 
-    struct FullScreen
+    struct FullScreen final
     {
     };
 

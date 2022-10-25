@@ -10,11 +10,11 @@ class QJsonObject;
 
 namespace config
 {
-struct CodeCharts
+struct CodeCharts final
 {
     static CodeCharts load(QJsonObject const &bubbleView);
 
-    struct StringCharacters
+    struct StringCharacters final
     {
         static QString const UPPER_CASE;
         static QString const LOWER_CASE;
@@ -25,7 +25,7 @@ struct CodeCharts
         bool numbers;
     };
 
-    struct CodeChartsPicture
+    struct CodeChartsPicture final
     {
         QString name;
         Dimensions grid;

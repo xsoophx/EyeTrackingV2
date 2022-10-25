@@ -9,11 +9,11 @@ class QJsonObject;
 
 namespace config
 {
-struct EyeTracking
+struct EyeTracking final
 {
     static EyeTracking load(QJsonObject const &eyeTracking);
 
-    struct EyeTrackingPicture
+    struct EyeTrackingPicture final
     {
         static QString const NAME;
         static QString const PICTURE_VIEW_TIME;

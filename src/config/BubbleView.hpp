@@ -8,11 +8,11 @@ class QJsonObject;
 
 namespace config
 {
-struct BubbleView
+struct BubbleView final
 {
     static BubbleView load(QJsonObject const &bubbleView);
 
-    struct BubbleViewPicture
+    struct BubbleViewPicture final
     {
         enum class FilterType
         {
@@ -28,7 +28,7 @@ struct BubbleView
         };
 
         QString name;
-        struct Filter
+        struct Filter final
         {
             static QString const GRADIENT;
             static QString const FILTER_TYPE;

@@ -9,11 +9,11 @@ class QJsonObject;
 
 namespace config
 {
-struct ZoomMaps
+struct ZoomMaps final
 {
     static ZoomMaps load(QJsonObject const &zoomMaps);
 
-    struct KeyBindings
+    struct KeyBindings final
     {
         static QString const UP;
         static QString const DOWN;
@@ -30,7 +30,7 @@ struct ZoomMaps
         QChar out;
     };
 
-    struct ZoomMapsPicture
+    struct ZoomMapsPicture final
     {
         static QString const NAME;
         static QString const ZOOM_SPEED;

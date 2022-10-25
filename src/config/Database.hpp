@@ -7,7 +7,7 @@ class QJsonObject;
 
 namespace config
 {
-struct Database
+struct Database final
 {
     static Database load(QJsonObject const &database);
 

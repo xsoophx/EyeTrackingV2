@@ -15,9 +15,9 @@ inline bool isInt(QJsonValue const &value)
 {
     auto const doubleValue = value.toDouble();
     return !value.isDouble() || std::floor(doubleValue) != doubleValue;
-
 }
-struct Dimensions
+
+struct Dimensions final
 {
     quint16 width;
     quint16 height;
