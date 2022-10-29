@@ -1,11 +1,11 @@
 #include <QtWidgets/QApplication>
 
-#include "ui/UserInfoWidget.hpp"
+#include "ui/UserInfoPage.hpp"
 
 int main(int argc, char ** argv)
 {
     QApplication app{argc, argv};
-    ui::UserInfoWidget userInfoWidget;
+    ui::UserInfoPage userInfoWidget;
     userInfoWidget.show();
 
     return QApplication::exec();

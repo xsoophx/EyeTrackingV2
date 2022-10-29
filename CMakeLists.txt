@@ -19,6 +19,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(spdlog DocTest)
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
 add_library(EyeTrackingV2_impl STATIC
@@ -33,7 +34,7 @@ add_library(EyeTrackingV2_impl STATIC
         src/config/EyeTracking.cpp src/config/EyeTracking.hpp
         src/config/DataClient.cpp src/config/DataClient.hpp
         src/config/Database.cpp src/config/Database.hpp
-        src/ui/UserInfoWidget.cpp src/ui/UserInfoWidget.hpp
+        src/ui/UserInfoPage.cpp src/ui/UserInfoPage.hpp src/ui/UserInfoPage.ui
         )
 target_include_directories(EyeTrackingV2_impl INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_link_libraries(EyeTrackingV2_impl PUBLIC Qt5::Core Qt5::Gui Qt5::Widgets spdlog::spdlog)
