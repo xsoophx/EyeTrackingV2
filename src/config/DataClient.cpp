@@ -2,6 +2,7 @@
 #include "Helpers.hpp"
 
 #include <QtCore/QJsonArray>
+#include <utility>
 
 namespace
 {
@@ -47,8 +48,14 @@ DataClient DataClient::load(QJsonObject const &dataClient)
 {
     checkObjectForKeys(dataClient, DataClient::COLOR_SAMPLE_BOARD);
 
-    return DataClient{
-        .colorSampleBoard = colorsFromJsonArray(dataClient[DataClient::COLOR_SAMPLE_BOARD].toArray())
+    return DataClient{colorsFromJsonArray(dataClient[DataClient::COLOR_SAMPLE_BOARD].toArray())
     };
 }
+DataClient::DataClient(std::vector<QColor> colorSampleBoard)
+    : colorSampleBoard{std::move(colorSampleBoard)}
+{}
+
+DataClient::DataClient()
+    : DataClient({QColor{255U, 255U, 255U}})
+{};
 }

@@ -1,6 +1,8 @@
 #ifndef CONFIG_DATABASE_HPP
 #define CONFIG_DATABASE_HPP
 
+#include "../Constants.hpp"
+
 #include <QtCore/QString>
 
 class QJsonObject;
@@ -11,9 +13,12 @@ struct Database final
 {
     static Database load(QJsonObject const &database);
 
-    static QString const DATABASE_PATH;
+    // TODO: refactor text constants
+    static QString const DATABASE_TEXT;
 
-    QString databasePath;
+    QString databasePath{config::DATABASE_PATH};
+
+    explicit Database(QString databasePath);
 };
 }
 

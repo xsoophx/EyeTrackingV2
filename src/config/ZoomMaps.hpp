@@ -1,6 +1,8 @@
 #ifndef CONFIG_ZOOMMAPS_HPP
 #define CONFIG_ZOOMMAPS_HPP
 
+#include "../Constants.hpp"
+
 #include <QtCore/QString>
 
 #include <vector>
@@ -22,12 +24,12 @@ struct ZoomMaps final
         static QString const IN;
         static QString const OUT;
 
-        QChar up;
-        QChar down;
-        QChar left;
-        QChar right;
-        QChar in;
-        QChar out;
+        QChar up{'W'};
+        QChar down{'S'};
+        QChar left{'A'};
+        QChar right{'D'};
+        QChar in{'I'};
+        QChar out{'O'};
     };
 
     struct ZoomMapsPicture final
@@ -35,8 +37,8 @@ struct ZoomMaps final
         static QString const NAME;
         static QString const ZOOM_SPEED;
 
-        QString name;
-        double zoomSpeed;
+        QString name{config::DEFAULT_IMAGE};
+        double zoomSpeed{1.0F};
     };
 
     static QString const KEY_BINDINGS;
@@ -44,6 +46,7 @@ struct ZoomMaps final
 
     KeyBindings keyBindings;
     std::vector<ZoomMapsPicture> pictures;
+
 };
 }
 

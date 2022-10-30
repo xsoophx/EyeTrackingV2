@@ -2,6 +2,7 @@
 #include "Helpers.hpp"
 
 #include <QtCore/QJsonArray>
+#include <utility>
 
 
 namespace
@@ -50,8 +51,14 @@ EyeTracking EyeTracking::load(QJsonObject const &eyeTracking)
 {
     checkObjectForKeys(eyeTracking, EyeTracking::PICTURES);
 
-    return EyeTracking{
-        .pictures = eyeTrackingPicturesFromJsonArray(eyeTracking[EyeTracking::PICTURES].toArray())
+    return EyeTracking{eyeTrackingPicturesFromJsonArray(eyeTracking[EyeTracking::PICTURES].toArray())
     };
 }
+EyeTracking::EyeTracking(std::vector<EyeTrackingPicture> pictures)
+    : pictures{std::move(pictures)}
+{}
+
+EyeTracking::EyeTracking()
+    : EyeTracking({EyeTrackingPicture{}})
+{}
 }

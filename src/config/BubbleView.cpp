@@ -1,9 +1,11 @@
 #include "BubbleView.hpp"
+#include "../Config.hpp"
 #include "Exceptions.hpp"
 #include "Helpers.hpp"
 
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonArray>
+#include <utility>
 
 namespace
 {
@@ -101,8 +103,13 @@ BubbleView BubbleView::load(QJsonObject const &bubbleView)
     if (!bubbleView[PICTURES].isArray())
         throw LoadingException{"pictures of Bubble View is not an array."};
 
-    return {
-        .pictures = bubbleViewPicturesFromJsonArray(bubbleView[PICTURES].toArray())
-    };
+    return BubbleView{bubbleViewPicturesFromJsonArray(bubbleView[PICTURES].toArray())};
 }
+BubbleView::BubbleView(std::vector<BubbleViewPicture> pictures)
+    : pictures{std::move(pictures)}
+{}
+
+BubbleView::BubbleView()
+    : BubbleView({BubbleViewPicture{}})
+{}
 }

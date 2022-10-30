@@ -1,6 +1,7 @@
 #ifndef CONFIG_CODECHARTS_HPP
 #define CONFIG_CODECHARTS_HPP
 
+#include "../Constants.hpp"
 #include "Helpers.hpp"
 
 #include <QtCore/QString>
@@ -20,18 +21,20 @@ struct CodeCharts final
         static QString const LOWER_CASE;
         static QString const NUMBERS;
 
-        bool upperCase;
-        bool lowerCase;
-        bool numbers;
+        bool upperCase{true};
+        bool lowerCase{true};
+        bool numbers{true};
     };
 
     struct CodeChartsPicture final
     {
-        QString name;
-        Dimensions grid;
-        quint16 pictureViewTime;
-        bool relative;
-        quint16 maxRecursionDepth;
+        static Dimensions const DEFAULT_GRID;
+
+        QString name{config::DEFAULT_IMAGE};
+        Dimensions grid{DEFAULT_GRID};
+        quint16 pictureViewTime{5U};
+        bool relative{false};
+        quint16 maxRecursionDepth{3U};
 
     };
 
@@ -41,14 +44,13 @@ struct CodeCharts final
     static QString const STRING_CHARACTERS;
     static QString const PICTURES;
 
-    quint16 matrixViewTime;
-    quint16 minViewsToSubdivide;
-    bool ordered;
-    StringCharacters stringCharacters;
-    std::vector<CodeChartsPicture> pictures;
+    quint16 matrixViewTime{5U};
+    quint16 minViewsToSubdivide{3U};
+    bool ordered{false};
+    StringCharacters stringCharacters{};
+    std::vector<CodeChartsPicture> pictures{};
 
 };
 }
-
 
 #endif //CONFIG_CODECHARTS_HPP

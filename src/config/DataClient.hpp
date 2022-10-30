@@ -19,6 +19,9 @@ struct DataClient final
     static QString const BLUE;
 
     std::vector<QColor> colorSampleBoard;
+
+    explicit DataClient(std::vector<QColor> colorSampleBoard);
+    DataClient();
 };
 }
 

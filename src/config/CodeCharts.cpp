@@ -50,6 +50,8 @@ QString const CodeCharts::StringCharacters::UPPER_CASE{"upperCase"};
 
 QString const CodeCharts::StringCharacters::NUMBERS{"numbers"};
 
+Dimensions const CodeCharts::CodeChartsPicture::DEFAULT_GRID{Dimensions{.width = 100, .height = 100}};
+
 CodeCharts CodeCharts::load(QJsonObject const &bubbleView)
 {
     checkObjectForKeys(bubbleView,

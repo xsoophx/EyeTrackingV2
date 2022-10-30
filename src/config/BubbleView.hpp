@@ -1,6 +1,8 @@
 #ifndef CONFIG_BUBBLEVIEW_HPP
 #define CONFIG_BUBBLEVIEW_HPP
 
+#include "../Constants.hpp"
+
 #include <QtCore/QString>
 #include <vector>
 
@@ -27,7 +29,7 @@ struct BubbleView final
             Square
         };
 
-        QString name;
+        QString name{config::DEFAULT_IMAGE};
         struct Filter final
         {
             static QString const GRADIENT;
@@ -36,11 +38,11 @@ struct BubbleView final
             static QString const SHAPE;
             static QString const SIZE;
 
-            quint16 gradient;
-            FilterType type;
-            quint16 intensity;
-            Shape shape;
-            quint16 size;
+            quint16 gradient{1U};
+            FilterType type{FilterType::GaussianBlur};
+            quint16 intensity{1U};
+            Shape shape{Shape::Circle};
+            quint16 size{1U};
 
         } filter;
 
@@ -48,6 +50,9 @@ struct BubbleView final
 
     static QString const PICTURES;
     std::vector<BubbleViewPicture> pictures;
+
+    explicit BubbleView(std::vector<BubbleViewPicture> pictures);
+    BubbleView();
 };
 }
 

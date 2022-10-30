@@ -17,7 +17,6 @@
 #include <QtGlobal>
 #include <QtGui/QColor>
 
-
 struct Config
 {
     static QString const GENERAL;

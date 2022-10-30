@@ -1,16 +1,20 @@
 #include "Database.hpp"
+
+#include <utility>
 #include "Helpers.hpp"
 
 namespace config
 {
-QString const Database::DATABASE_PATH{"databasePath"};
+QString const Database::DATABASE_TEXT{"databasePath"};
 
 Database Database::load(QJsonObject const &database)
 {
-    checkObjectForKeys(database, Database::DATABASE_PATH);
+    checkObjectForKeys(database, Database::DATABASE_TEXT);
 
-    return Database{
-        .databasePath = database[Database::DATABASE_PATH].toString()
+    return Database{database[Database::DATABASE_TEXT].toString()
     };
 }
+Database::Database(QString databasePath)
+    : databasePath{std::move(databasePath)}
+{}
 }

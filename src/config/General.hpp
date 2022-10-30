@@ -1,6 +1,7 @@
 #ifndef CONFIG_GENERAL_HPP
 #define CONFIG_GENERAL_HPP
 
+#include "../Constants.hpp"
 #include "Helpers.hpp"
 
 #include <optional>
@@ -31,11 +32,11 @@ struct General final
 
     using DisplayMode = std::variant<FullScreen, Dimensions>;
 
-    DisplayMode displayMode;
-    std::optional<Tool> activatedTool;
-    QString masterPath;
-    QString exportPath;
-    QString imagePath;
+    DisplayMode displayMode{FullScreen{}};
+    std::optional<Tool> activatedTool{};
+    QString masterPath{};
+    QString exportPath{masterPath + config::EXPORT_PATH};
+    QString imagePath{masterPath + config::IMAGE_PATH};
 };
 }
 

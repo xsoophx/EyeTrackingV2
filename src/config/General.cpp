@@ -56,11 +56,6 @@ namespace config
 {
 General General::load(QJsonObject const &general)
 {
-    checkObjectForKeys(general,
-                       QStringLiteral("masterPath"),
-                       QStringLiteral("exportPath"),
-                       QStringLiteral("imagePath"));
-
     return {
         .displayMode = displayModeFromJson(general["displayMode"]),
         .activatedTool = toolFromJson(general["activatedTool"]),
@@ -68,6 +63,5 @@ General General::load(QJsonObject const &general)
         .exportPath = general["exportPath"].toString(),
         .imagePath = general["imagePath"].toString(),
     };
-
 }
 }
