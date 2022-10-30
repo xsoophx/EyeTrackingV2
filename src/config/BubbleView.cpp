@@ -1,5 +1,4 @@
 #include "BubbleView.hpp"
-#include "../Config.hpp"
 #include "Exceptions.hpp"
 #include "Helpers.hpp"
 
