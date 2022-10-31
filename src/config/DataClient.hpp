@@ -13,11 +13,6 @@ struct DataClient final
 {
     static DataClient load(QJsonObject const &dataClient);
 
-    static QString const COLOR_SAMPLE_BOARD;
-    static QString const RED;
-    static QString const GREEN;
-    static QString const BLUE;
-
     std::vector<QColor> colorSampleBoard;
 
     explicit DataClient(std::vector<QColor> colorSampleBoard);

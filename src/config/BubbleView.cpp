@@ -9,9 +9,22 @@
 namespace
 {
 using namespace config;
-using BubbleViewFilter = BubbleView::BubbleViewPicture::Filter;
 using BubbleViewFilterType = BubbleView::BubbleViewPicture::FilterType;
 using BubbleViewShape = BubbleView::BubbleViewPicture::Shape;
+
+static QString const PICTURES{"pictures"};
+
+static QString const FILTER_TYPE{"type"};
+
+static QString const GRADIENT{"gradient"};
+
+static QString const INTENSITY{"intensity"};
+
+static QString const SHAPE{"shape"};
+
+static QString const SIZE{"size"};
+
+static QString const FILTER{"filter"};
 
 BubbleView::BubbleViewPicture::Filter filterFromJson(QJsonValue const &value)
 {
@@ -21,13 +34,13 @@ BubbleView::BubbleViewPicture::Filter filterFromJson(QJsonValue const &value)
     auto const object = value.toObject();
 
     ObjectComponents const
-        components{"filter",
-                   {BubbleViewFilter::SHAPE},
+        components{FILTER,
+                   {SHAPE},
                    {
-                       BubbleViewFilter::GRADIENT,
-                       BubbleViewFilter::INTENSITY,
-                       BubbleViewFilter::SIZE,
-                       BubbleViewFilter::FILTER_TYPE
+                       GRADIENT,
+                       INTENSITY,
+                       SIZE,
+                       FILTER_TYPE
                    },
                    {}
     };
@@ -42,22 +55,20 @@ BubbleView::BubbleViewPicture::Filter filterFromJson(QJsonValue const &value)
         {"circle", BubbleViewShape::Circle},
         {"square", BubbleViewShape::Square}};
 
-    checkObjectForKeys(object,
-                       BubbleViewFilter::FILTER_TYPE,
-                       BubbleViewFilter::SHAPE);
+    checkObjectForKeys(object, FILTER_TYPE, SHAPE);
 
     auto const filterType =
-        filterTypes.find(value[BubbleViewFilter::FILTER_TYPE].toString()).value();
+        filterTypes.find(value[FILTER_TYPE].toString()).value();
     auto const
-        shapeType = shapeTypes.find(value[BubbleViewFilter::SHAPE].toString()).value();
+        shapeType = shapeTypes.find(value[SHAPE].toString()).value();
 
 
     return BubbleView::BubbleViewPicture::Filter{
-        .gradient = static_cast<quint16>(value[BubbleViewFilter::GRADIENT].toInt()),
+        .gradient = static_cast<quint16>(value[GRADIENT].toInt()),
         .type = filterType,
-        .intensity = static_cast<quint16>(value[BubbleViewFilter::INTENSITY].toInt()),
+        .intensity = static_cast<quint16>(value[INTENSITY].toInt()),
         .shape = shapeType,
-        .size = static_cast<quint16>(value[BubbleViewFilter::SIZE].toInt()),
+        .size = static_cast<quint16>(value[SIZE].toInt()),
 
     };
 
@@ -69,13 +80,12 @@ std::vector<BubbleView::BubbleViewPicture> bubbleViewPicturesFromJsonArray(QJson
 
     std::transform(pictures.begin(), pictures.end(), result.begin(), [](QJsonValue const &value)
     {
-        //TODO add constants
-        if (!value.isObject() || !value["name"].isString() || !value["filter"].isString())
+        if (!value.isObject() || !value[config::NAME].isString() || !value[FILTER].isString())
             throw config::LoadingException{"Name, value or BubbleViewPicture is not an object."};
 
         return BubbleView::BubbleViewPicture{
-            .name = value["name"].toString(),
-            .filter = filterFromJson(value["filter"])
+            .name = value[config::NAME].toString(),
+            .filter = filterFromJson(value[FILTER])
         };
     });
 
@@ -85,17 +95,6 @@ std::vector<BubbleView::BubbleViewPicture> bubbleViewPicturesFromJsonArray(QJson
 
 namespace config
 {
-QString const BubbleView::PICTURES{"pictures"};
-
-QString const BubbleViewFilter::FILTER_TYPE{"type"};
-
-QString const BubbleViewFilter::GRADIENT{"gradient"};
-
-QString const BubbleViewFilter::INTENSITY{"intensity"};
-
-QString const BubbleViewFilter::SHAPE{"shape"};
-
-QString const BubbleViewFilter::SIZE{"size"};
 
 BubbleView BubbleView::load(QJsonObject const &bubbleView)
 {

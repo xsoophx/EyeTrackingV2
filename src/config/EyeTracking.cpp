@@ -10,6 +10,11 @@ namespace
 using namespace config;
 using EyeTrackingPicture = EyeTracking::EyeTrackingPicture;
 
+static QString const PICTURES{"pictures"};
+
+static QString const PICTURE_VIEW_TIME{"pictureViewTime"};
+
+
 std::vector<EyeTrackingPicture> eyeTrackingPicturesFromJsonArray(QJsonArray const &pictures)
 {
     std::vector<EyeTrackingPicture> result(pictures.size());
@@ -20,16 +25,16 @@ std::vector<EyeTrackingPicture> eyeTrackingPicturesFromJsonArray(QJsonArray cons
                    [index = size_t{0}](QJsonValue const &value) mutable
                    {
                        if (!value.isObject()
-                           || !value[EyeTrackingPicture::NAME].isString()
-                           || !isInt(value[EyeTrackingPicture::PICTURE_VIEW_TIME]))
+                           || !value[config::NAME].isString()
+                           || !isInt(value[PICTURE_VIEW_TIME]))
                            throw config::LoadingException{
                                QStringLiteral(
                                    "%1 of Eye Tracking Pictures is not an object or has invalid name or picture view time.")
                                    .arg(index++)};
 
                        return EyeTracking::EyeTrackingPicture{
-                           .name = value[EyeTrackingPicture::NAME].toString(),
-                           .pictureViewTime = static_cast<quint16>(value[EyeTrackingPicture::PICTURE_VIEW_TIME]
+                           .name = value[config::NAME].toString(),
+                           .pictureViewTime = static_cast<quint16>(value[PICTURE_VIEW_TIME]
                                .toInt()),
                        };
                    }
@@ -41,17 +46,12 @@ std::vector<EyeTrackingPicture> eyeTrackingPicturesFromJsonArray(QJsonArray cons
 
 namespace config
 {
-QString const EyeTracking::PICTURES{"pictures"};
-
-QString const EyeTracking::EyeTrackingPicture::NAME{"name"};
-
-QString const EyeTracking::EyeTrackingPicture::PICTURE_VIEW_TIME{"pictureViewTime"};
 
 EyeTracking EyeTracking::load(QJsonObject const &eyeTracking)
 {
-    checkObjectForKeys(eyeTracking, EyeTracking::PICTURES);
+    checkObjectForKeys(eyeTracking, PICTURES);
 
-    return EyeTracking{eyeTrackingPicturesFromJsonArray(eyeTracking[EyeTracking::PICTURES].toArray())
+    return EyeTracking{eyeTrackingPicturesFromJsonArray(eyeTracking[PICTURES].toArray())
     };
 }
 EyeTracking::EyeTracking(std::vector<EyeTrackingPicture> pictures)

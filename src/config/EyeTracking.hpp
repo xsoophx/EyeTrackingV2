@@ -17,14 +17,9 @@ struct EyeTracking final
 
     struct EyeTrackingPicture final
     {
-        static QString const NAME;
-        static QString const PICTURE_VIEW_TIME;
-
         QString name{config::DEFAULT_IMAGE};
         quint16 pictureViewTime{5U};
     };
-
-    static QString const PICTURES;
 
     std::vector<EyeTrackingPicture> pictures;
 

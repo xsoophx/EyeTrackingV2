@@ -3,7 +3,22 @@
 namespace
 {
 using namespace config;
-using StringCharacters = CodeCharts::StringCharacters;
+
+QString const MATRIX_VIEW_TIME{"matrixViewTime"};
+
+QString const MIN_VIEWS_TO_SUBDIVIDE{"minViewsToSubdivide"};
+
+QString const ORDERED{"ordered"};
+
+QString const STRING_CHARACTERS{"stringCharacters"};
+
+QString const PICTURES{"pictures"};
+
+QString const LOWER_CASE{"lowerCase"};
+
+QString const UPPER_CASE{"upperCase"};
+
+QString const NUMBERS{"numbers"};
 
 CodeCharts::StringCharacters stringCharactersFromJson(QJsonValue stringCharacters)
 {
@@ -12,21 +27,16 @@ CodeCharts::StringCharacters stringCharactersFromJson(QJsonValue stringCharacter
 
     auto const object = stringCharacters.toObject();
 
-    checkObjectForKeys(object,
-                       StringCharacters::UPPER_CASE,
-                       StringCharacters::LOWER_CASE,
-                       StringCharacters::NUMBERS);
+    checkObjectForKeys(object, UPPER_CASE, LOWER_CASE, NUMBERS);
 
-    ObjectComponents const objectComponents{ObjectComponents::createStringsOnly(CodeCharts::STRING_CHARACTERS,
-                                                                                {StringCharacters::UPPER_CASE,
-                                                                                 StringCharacters::LOWER_CASE,
-                                                                                 StringCharacters::NUMBERS})};
+    ObjectComponents const objectComponents{ObjectComponents::createStringsOnly(STRING_CHARACTERS,
+                                                                                {UPPER_CASE, LOWER_CASE, NUMBERS})};
     objectComponents.checkComponentsByParent(object);
 
     return {
-        .upperCase = stringCharacters[StringCharacters::UPPER_CASE].toBool(),
-        .lowerCase = stringCharacters[StringCharacters::LOWER_CASE].toBool(),
-        .numbers = stringCharacters[StringCharacters::NUMBERS].toBool(),
+        .upperCase = stringCharacters[UPPER_CASE].toBool(),
+        .lowerCase = stringCharacters[LOWER_CASE].toBool(),
+        .numbers = stringCharacters[NUMBERS].toBool(),
     };
 }
 
@@ -34,21 +44,6 @@ CodeCharts::StringCharacters stringCharactersFromJson(QJsonValue stringCharacter
 
 namespace config
 {
-QString const CodeCharts::MATRIX_VIEW_TIME{"matrixViewTime"};
-
-QString const CodeCharts::MIN_VIEWS_TO_SUBDIVIDE{"minViewsToSubdivide"};
-
-QString const CodeCharts::ORDERED{"ordered"};
-
-QString const CodeCharts::STRING_CHARACTERS{"stringCharacters"};
-
-QString const CodeCharts::PICTURES{"pictures"};
-
-QString const CodeCharts::StringCharacters::LOWER_CASE{"lowerCase"};
-
-QString const CodeCharts::StringCharacters::UPPER_CASE{"upperCase"};
-
-QString const CodeCharts::StringCharacters::NUMBERS{"numbers"};
 
 Dimensions const CodeCharts::CodeChartsPicture::DEFAULT_GRID{Dimensions{.width = 100, .height = 100}};
 

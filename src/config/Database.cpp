@@ -3,15 +3,20 @@
 #include <utility>
 #include "Helpers.hpp"
 
+namespace
+{
+// TODO: refactor text constants
+static QString const DATABASE_TEXT{"databasePath"};
+
+}
+
 namespace config
 {
-QString const Database::DATABASE_TEXT{"databasePath"};
-
 Database Database::load(QJsonObject const &database)
 {
-    checkObjectForKeys(database, Database::DATABASE_TEXT);
+    checkObjectForKeys(database, DATABASE_TEXT);
 
-    return Database{database[Database::DATABASE_TEXT].toString()
+    return Database{database[DATABASE_TEXT].toString()
     };
 }
 Database::Database(QString databasePath)

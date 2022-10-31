@@ -13,9 +13,6 @@ struct Database final
 {
     static Database load(QJsonObject const &database);
 
-    // TODO: refactor text constants
-    static QString const DATABASE_TEXT;
-
     QString databasePath{config::DATABASE_PATH};
 
     explicit Database(QString databasePath);

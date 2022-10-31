@@ -12,6 +12,9 @@ inline QString const DATABASE_PATH{"/database"};
 inline QString const EXPORT_PATH{"/export"};
 
 inline QString const IMAGE_PATH{"/images"};
+
+inline QString const NAME{"name"};
+
 }
 
 #endif //CONFIG_CONSTANTS_HPP

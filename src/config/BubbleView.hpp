@@ -32,12 +32,6 @@ struct BubbleView final
         QString name{config::DEFAULT_IMAGE};
         struct Filter final
         {
-            static QString const GRADIENT;
-            static QString const FILTER_TYPE;
-            static QString const INTENSITY;
-            static QString const SHAPE;
-            static QString const SIZE;
-
             quint16 gradient{1U};
             FilterType type{FilterType::GaussianBlur};
             quint16 intensity{1U};
@@ -48,7 +42,6 @@ struct BubbleView final
 
     };
 
-    static QString const PICTURES;
     std::vector<BubbleViewPicture> pictures;
 
     explicit BubbleView(std::vector<BubbleViewPicture> pictures);
