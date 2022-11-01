@@ -1,5 +1,9 @@
 #include "General.hpp"
 
+#include <functional>
+
+#include <QtCore/QCoreApplication>
+
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonValue>
 
@@ -52,16 +56,36 @@ std::optional<General::Tool> toolFromJson(QJsonValue const &value)
 }
 }
 
+namespace
+{
+QString
+getValueOrDefault(QJsonObject const &object, char const *const key, std::function<QString()> const &defaultGenerator)
+{
+    auto const value = object[key].toString();
+    return value.isEmpty() ? defaultGenerator() : value;
+}
+}
+
 namespace config
 {
 General General::load(QJsonObject const &general)
 {
+    auto const masterPath = getValueOrDefault(general, "masterPath", &QCoreApplication::applicationDirPath);
+    auto const exportPath = getValueOrDefault(general, "exportPath", [&masterPath]
+    {
+        return masterPath + config::EXPORT_PATH;
+    });
+    auto const imagePath = getValueOrDefault(general, "imagePath", [&masterPath]
+    {
+        return masterPath + config::IMAGE_PATH;
+    });
+
     return {
         .displayMode = displayModeFromJson(general["displayMode"]),
         .activatedTool = toolFromJson(general["activatedTool"]),
-        .masterPath = general["masterPath"].toString(),
-        .exportPath = general["exportPath"].toString(),
-        .imagePath = general["imagePath"].toString(),
+        .masterPath = masterPath,
+        .exportPath = exportPath,
+        .imagePath = imagePath,
     };
 }
 }
