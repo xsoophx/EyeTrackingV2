@@ -3,17 +3,19 @@
 
 #include <QtWidgets/QStackedWidget>
 
-namespace ui {
+namespace ui
+{
 class UserInfoPage;
 
-class MainWindow final : public QStackedWidget {
-    Q_OBJECT
+class MainWindow final: public QStackedWidget
+{
+Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget * parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
 
 private:
-    UserInfoPage* userInfoPage;
+    UserInfoPage *userInfoPage;
 };
 }
 

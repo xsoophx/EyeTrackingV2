@@ -3,7 +3,6 @@
 #include <functional>
 
 #include <QtCore/QCoreApplication>
-
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonValue>
 
