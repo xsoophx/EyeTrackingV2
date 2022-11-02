@@ -35,6 +35,7 @@ add_library(EyeTrackingV2_impl STATIC
         src/config/DataClient.cpp src/config/DataClient.hpp
         src/config/Database.cpp src/config/Database.hpp
         src/ui/UserInfoPage.cpp src/ui/UserInfoPage.hpp src/ui/UserInfoPage.ui
+        src/ui/MainWindow.cpp src/ui/MainWindow.hpp
         src/Constants.hpp)
 target_include_directories(EyeTrackingV2_impl INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_link_libraries(EyeTrackingV2_impl PUBLIC Qt5::Core Qt5::Gui Qt5::Widgets spdlog::spdlog)
