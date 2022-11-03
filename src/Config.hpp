@@ -19,14 +19,6 @@
 
 struct Config
 {
-    static QString const GENERAL;
-    static QString const BUBBLE_VIEW;
-    static QString const CODE_CHARTS;
-    static QString const ZOOM_MAPS;
-    static QString const EYE_TRACKING;
-    static QString const DATA_CLIENT;
-    static QString const DATABASE;
-
     using General = config::General;
     using BubbleView = config::BubbleView;
     using ZoomMaps = config::ZoomMaps;

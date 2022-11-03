@@ -27,7 +27,7 @@ struct ZoomMaps final
 
     struct ZoomMapsPicture final
     {
-        QString name{config::DEFAULT_IMAGE};
+        QString name{DEFAULT_IMAGE};
         double zoomSpeed{1.0F};
     };
 

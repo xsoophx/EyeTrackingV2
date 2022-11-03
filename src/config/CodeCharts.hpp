@@ -26,7 +26,7 @@ struct CodeCharts final
     {
         static Dimensions const DEFAULT_GRID;
 
-        QString name{config::DEFAULT_IMAGE};
+        QString name{DEFAULT_IMAGE};
         Dimensions grid{DEFAULT_GRID};
         quint16 pictureViewTime{5U};
         bool relative{false};

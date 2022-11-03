@@ -4,6 +4,8 @@ namespace
 {
 using namespace config;
 
+namespace field_name
+{
 QString const MATRIX_VIEW_TIME{"matrixViewTime"};
 
 QString const MIN_VIEWS_TO_SUBDIVIDE{"minViewsToSubdivide"};
@@ -19,24 +21,27 @@ QString const LOWER_CASE{"lowerCase"};
 QString const UPPER_CASE{"upperCase"};
 
 QString const NUMBERS{"numbers"};
+}
 
 CodeCharts::StringCharacters stringCharactersFromJson(QJsonValue stringCharacters)
 {
     if (!stringCharacters.isObject())
-        throw config::LoadingException{"String Characters of Codecharts is not an object."};
+        throw LoadingException{"String Characters of Codecharts is not an object."};
 
     auto const object = stringCharacters.toObject();
 
-    checkObjectForKeys(object, UPPER_CASE, LOWER_CASE, NUMBERS);
+    checkObjectForKeys(object, field_name::UPPER_CASE, field_name::LOWER_CASE, field_name::NUMBERS);
 
-    ObjectComponents const objectComponents{ObjectComponents::createStringsOnly(STRING_CHARACTERS,
-                                                                                {UPPER_CASE, LOWER_CASE, NUMBERS})};
+    ObjectComponents const objectComponents{ObjectComponents::createStringsOnly(field_name::STRING_CHARACTERS,
+                                                                                {field_name::UPPER_CASE,
+                                                                                 field_name::LOWER_CASE,
+                                                                                 field_name::NUMBERS})};
     objectComponents.checkComponentsByParent(object);
 
     return {
-        .upperCase = stringCharacters[UPPER_CASE].toBool(),
-        .lowerCase = stringCharacters[LOWER_CASE].toBool(),
-        .numbers = stringCharacters[NUMBERS].toBool(),
+        .upperCase = stringCharacters[field_name::UPPER_CASE].toBool(),
+        .lowerCase = stringCharacters[field_name::LOWER_CASE].toBool(),
+        .numbers = stringCharacters[field_name::NUMBERS].toBool(),
     };
 }
 
@@ -50,25 +55,25 @@ Dimensions const CodeCharts::CodeChartsPicture::DEFAULT_GRID{Dimensions{.width =
 CodeCharts CodeCharts::load(QJsonObject const &bubbleView)
 {
     checkObjectForKeys(bubbleView,
-                       MATRIX_VIEW_TIME,
-                       MIN_VIEWS_TO_SUBDIVIDE,
-                       ORDERED,
-                       STRING_CHARACTERS,
-                       PICTURES);
+                       field_name::MATRIX_VIEW_TIME,
+                       field_name::MIN_VIEWS_TO_SUBDIVIDE,
+                       field_name::ORDERED,
+                       field_name::STRING_CHARACTERS,
+                       field_name::PICTURES);
 
     ObjectComponents const components{
         "CodeCharts",
         {},
-        {MATRIX_VIEW_TIME, MIN_VIEWS_TO_SUBDIVIDE},
-        {ORDERED}
+        {field_name::MATRIX_VIEW_TIME, field_name::MIN_VIEWS_TO_SUBDIVIDE},
+        {field_name::ORDERED}
     };
     components.checkComponentsByParent(bubbleView);
 
     return CodeCharts{
-        .matrixViewTime = static_cast<quint16>(bubbleView[MATRIX_VIEW_TIME].toInt()),
-        .minViewsToSubdivide = static_cast<quint16>(bubbleView[MIN_VIEWS_TO_SUBDIVIDE].toInt()),
-        .ordered = bubbleView[ORDERED].toBool(),
-        .stringCharacters = stringCharactersFromJson(bubbleView[STRING_CHARACTERS])
+        .matrixViewTime = static_cast<quint16>(bubbleView[field_name::MATRIX_VIEW_TIME].toInt()),
+        .minViewsToSubdivide = static_cast<quint16>(bubbleView[field_name::MIN_VIEWS_TO_SUBDIVIDE].toInt()),
+        .ordered = bubbleView[field_name::ORDERED].toBool(),
+        .stringCharacters = stringCharactersFromJson(bubbleView[field_name::STRING_CHARACTERS])
     };
 }
 }

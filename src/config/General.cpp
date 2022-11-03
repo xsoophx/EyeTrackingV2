@@ -10,21 +10,40 @@ namespace
 {
 using namespace config;
 
+namespace field_name
+{
+
+static QString const HEIGHT{"height"};
+
+static QString const WIDTH{"width"};
+
+static QString const FULL_SCREEN{"fullScreen"};
+
+static QString const DISPLAY_MODE{"displayMode"};
+
+static QString const ACTIVATED_TOOL{"activatedTool"};
+
+static char const *const MASTER_PATH{"masterPath"};
+
+static char const *const EXPORT_PATH{"exportPath"};
+
+static char const *const IMAGE_PATH{"imagePath"};
+}
+
 General::DisplayMode displayModeFromJson(QJsonValue const &value)
 {
-    static QString const height = "height";
-    static QString const width = "width";
+    using namespace field_name;
 
-    if (value.isString() && value.toString() == "fullScreen")
+    if (value.isString() && value.toString() == FULL_SCREEN)
         return General::FullScreen{};
 
     if (value.isObject()) {
         auto const object = value.toObject();
-        checkObjectForKeys(object, height, width);
+        checkObjectForKeys(object, HEIGHT, WIDTH);
 
         return Dimensions{
-            .width = static_cast<quint16>(object[width].toInt()),
-            .height = static_cast<quint16>(object[height].toInt()),
+            .width = static_cast<quint16>(object[WIDTH].toInt()),
+            .height = static_cast<quint16>(object[HEIGHT].toInt()),
         };
     }
 
@@ -35,12 +54,14 @@ General::DisplayMode displayModeFromJson(QJsonValue const &value)
 
 std::optional<General::Tool> toolFromJson(QJsonValue const &value)
 {
+    using namespace tools;
+
     static QMap<QString, General::Tool> const mapping{
-        {"bubbleView", General::Tool::BubbleView},
-        {"zoomMaps", General::Tool::ZoomMaps},
-        {"codecharts", General::Tool::CodeCharts},
-        {"eyeTracking", General::Tool::EyeTracking},
-        {"dataClient", General::Tool::DataClient},
+        {BUBBLE_VIEW, General::Tool::BubbleView},
+        {ZOOM_MAPS, General::Tool::ZoomMaps},
+        {CODE_CHARTS, General::Tool::CodeCharts},
+        {EYE_TRACKING, General::Tool::EyeTracking},
+        {DATA_CLIENT, General::Tool::DataClient},
     };
 
     if (!value.isString())
@@ -69,19 +90,20 @@ namespace config
 {
 General General::load(QJsonObject const &general)
 {
-    auto const masterPath = getValueOrDefault(general, "masterPath", &QCoreApplication::applicationDirPath);
-    auto const exportPath = getValueOrDefault(general, "exportPath", [&masterPath]
+
+    auto const masterPath = getValueOrDefault(general, field_name::MASTER_PATH, &QCoreApplication::applicationDirPath);
+    auto const exportPath = getValueOrDefault(general, field_name::EXPORT_PATH, [&masterPath]
     {
-        return masterPath + config::EXPORT_PATH;
+        return masterPath + paths::EXPORT_PATH;
     });
-    auto const imagePath = getValueOrDefault(general, "imagePath", [&masterPath]
+    auto const imagePath = getValueOrDefault(general, field_name::IMAGE_PATH, [&masterPath]
     {
-        return masterPath + config::IMAGE_PATH;
+        return masterPath + paths::IMAGE_PATH;
     });
 
     return {
-        .displayMode = displayModeFromJson(general["displayMode"]),
-        .activatedTool = toolFromJson(general["activatedTool"]),
+        .displayMode = displayModeFromJson(general[field_name::DISPLAY_MODE]),
+        .activatedTool = toolFromJson(general[field_name::ACTIVATED_TOOL]),
         .masterPath = masterPath,
         .exportPath = exportPath,
         .imagePath = imagePath,

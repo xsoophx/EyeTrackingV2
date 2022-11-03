@@ -9,8 +9,10 @@ struct UserInfoPagePrivate final
 {
     Ui_UserInfoPage ui;
 
-    void setupUi(QWidget * self) {
+    void setupUi(UserInfoPage *self)
+    {
         ui.setupUi(self);
+        QObject::connect(ui.buttonBox, &QDialogButtonBox::accepted, self, &UserInfoPage::accepted);
     }
 };
 

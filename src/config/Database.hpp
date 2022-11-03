@@ -13,7 +13,7 @@ struct Database final
 {
     static Database load(QJsonObject const &database);
 
-    QString databasePath{config::DATABASE_PATH};
+    QString databasePath{paths::DATABASE_PATH};
 
     explicit Database(QString databasePath);
 };

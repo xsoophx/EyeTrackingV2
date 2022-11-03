@@ -7,6 +7,8 @@ namespace
 {
 using namespace config;
 
+namespace field_name
+{
 static QString const KEY_BINDINGS{"keyBindings"};
 
 static QString const PICTURES{"pictures"};
@@ -24,9 +26,12 @@ static QString const IN{"in"};
 static QString const OUT{"out"};
 
 static QString const ZOOM_SPEED{"zoomSpeed"};
+}
 
 ZoomMaps::KeyBindings loadKeyBindingsFromJson(QJsonObject const &keyBindings)
 {
+    using namespace field_name;
+
     static std::vector<QString> keyCharacters
         {UP, DOWN, LEFT, RIGHT, IN, OUT};
 
@@ -49,6 +54,8 @@ ZoomMaps::KeyBindings loadKeyBindingsFromJson(QJsonObject const &keyBindings)
 
 std::vector<ZoomMaps::ZoomMapsPicture> zoomMapsPicturesFromJsonArray(QJsonArray const &pictures)
 {
+    using namespace field_name;
+
     std::vector<ZoomMaps::ZoomMapsPicture> result(pictures.size());
 
     std::transform(pictures.begin(),
@@ -79,6 +86,8 @@ namespace config
 
 ZoomMaps ZoomMaps::load(QJsonObject const &zoomMaps)
 {
+    using namespace field_name;
+
     checkObjectForKeys(zoomMaps, KEY_BINDINGS, PICTURES);
 
     return ZoomMaps{

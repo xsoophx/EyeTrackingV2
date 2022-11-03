@@ -17,6 +17,9 @@ public:
     explicit UserInfoPage(QWidget *parent = nullptr);
     ~UserInfoPage() noexcept override;
 
+signals:
+    void accepted();
+
 protected:
     void changeEvent(QEvent *event) override;
 

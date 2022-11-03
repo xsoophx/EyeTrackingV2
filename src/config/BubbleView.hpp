@@ -29,7 +29,7 @@ struct BubbleView final
             Square
         };
 
-        QString name{config::DEFAULT_IMAGE};
+        QString name{DEFAULT_IMAGE};
         struct Filter final
         {
             quint16 gradient{1U};

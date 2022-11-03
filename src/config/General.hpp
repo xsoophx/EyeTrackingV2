@@ -35,8 +35,8 @@ struct General final
     DisplayMode displayMode{FullScreen{}};
     std::optional<Tool> activatedTool{};
     QString masterPath{};
-    QString exportPath{masterPath + config::EXPORT_PATH};
-    QString imagePath{masterPath + config::IMAGE_PATH};
+    QString exportPath{masterPath + paths::EXPORT_PATH};
+    QString imagePath{masterPath + paths::IMAGE_PATH};
 };
 }
 

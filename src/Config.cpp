@@ -1,23 +1,11 @@
 #include "Config.hpp"
 
+#include "Constants.hpp"
+
 #include <QtCore/QFile>
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
-
-QString const Config::GENERAL{"general"};
-
-QString const Config::BUBBLE_VIEW{"bubbleView"};
-
-QString const Config::ZOOM_MAPS{"zoomMaps"};
-
-QString const Config::CODE_CHARTS{"codeCharts"};
-
-QString const Config::EYE_TRACKING{"eyeTracking"};
-
-QString const Config::DATA_CLIENT{"dataClient"};
-
-QString const Config::DATABASE{"database"};
 
 namespace
 {
@@ -32,6 +20,8 @@ QJsonObject getSubConfig(QJsonObject const &parent, QString const &name)
 
 Config Config::load(QString const &path)
 {
+    using namespace config::tools;
+
     QFile file{path};
     if (!file.open(QFile::ReadOnly))
         throw config::LoadingException{"File could not be loaded."};
@@ -43,12 +33,12 @@ Config Config::load(QString const &path)
     auto const config{document.object()};
 
     return Config{
-        .general = General::load(getSubConfig(config, Config::GENERAL)),
-        .bubbleView = BubbleView::load(getSubConfig(config, Config::BUBBLE_VIEW)),
-        .zoomMaps = ZoomMaps::load(getSubConfig(config, Config::ZOOM_MAPS)),
-        .codeCharts = CodeCharts::load(getSubConfig(config, Config::CODE_CHARTS)),
-        .eyeTracking = EyeTracking::load(getSubConfig(config, Config::EYE_TRACKING)),
-        .dataClient = DataClient::load(getSubConfig(config, Config::DATA_CLIENT)),
-        .database = Database::load(getSubConfig(config, Config::DATABASE))
+        .general = General::load(getSubConfig(config, GENERAL)),
+        .bubbleView = BubbleView::load(getSubConfig(config, BUBBLE_VIEW)),
+        .zoomMaps = ZoomMaps::load(getSubConfig(config, ZOOM_MAPS)),
+        .codeCharts = CodeCharts::load(getSubConfig(config, CODE_CHARTS)),
+        .eyeTracking = EyeTracking::load(getSubConfig(config, EYE_TRACKING)),
+        .dataClient = DataClient::load(getSubConfig(config, DATA_CLIENT)),
+        .database = Database::load(getSubConfig(config, DATABASE))
     };
 }

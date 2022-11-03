@@ -34,6 +34,7 @@ add_library(EyeTrackingV2_impl STATIC
         src/config/EyeTracking.cpp src/config/EyeTracking.hpp
         src/config/DataClient.cpp src/config/DataClient.hpp
         src/config/Database.cpp src/config/Database.hpp
+        src/ui/MainMenuPage.cpp src/ui/MainMenuPage.hpp src/ui/MainMenuPage.ui
         src/ui/UserInfoPage.cpp src/ui/UserInfoPage.hpp src/ui/UserInfoPage.ui
         src/ui/MainWindow.cpp src/ui/MainWindow.hpp
         src/Constants.hpp)
