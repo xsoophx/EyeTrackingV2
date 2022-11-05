@@ -29,27 +29,35 @@
       <item row="0" column="0">
        <widget class="QLabel" name="firstNameLabel">
         <property name="text">
-         <string>First name:</string>
+         <string>*First name:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="firstNameEdit"/>
+       <widget class="QLineEdit" name="firstNameEdit">
+        <property name="placeholderText">
+         <string>required</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="lastNameLabel">
         <property name="text">
-         <string>Last name:</string>
+         <string>*Last name:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lastNameEdit"/>
+       <widget class="QLineEdit" name="lastNameEdit">
+        <property name="placeholderText">
+         <string>required</string>
+        </property>
+       </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="ageLabel">
         <property name="text">
-         <string>Age:</string>
+         <string>*Age:</string>
         </property>
        </widget>
       </item>
@@ -67,8 +75,14 @@
           <height>0</height>
          </size>
         </property>
+        <property name="suffix">
+         <string> years</string>
+        </property>
+        <property name="minimum">
+         <number>10</number>
+        </property>
         <property name="maximum">
-         <number>150</number>
+         <number>100</number>
         </property>
        </widget>
       </item>
@@ -109,7 +123,7 @@
       <item row="4" column="0">
        <widget class="QLabel" name="visionLabel">
         <property name="text">
-         <string>Visually impaired:</string>
+         <string>*Visually impaired:</string>
         </property>
        </widget>
       </item>
@@ -130,6 +144,22 @@
           <string>No</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="infoLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>* is required</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
      </layout>

@@ -20,6 +20,12 @@ public:
 signals:
     void accepted();
 
+public slots:
+    void clearInputs();
+
+private slots:
+    void checkRequiredInput();
+
 protected:
     void changeEvent(QEvent *event) override;
 
