@@ -17,9 +17,6 @@ public:
     explicit MainMenuPage(QWidget *parent = nullptr);
     ~MainMenuPage() noexcept override;
 
-signals:
-    void quitClicked();
-
 protected:
     void changeEvent(QEvent *event) override;
 

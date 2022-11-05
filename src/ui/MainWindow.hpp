@@ -1,14 +1,17 @@
 #ifndef UI_MAINWINDOW_HPP
 #define UI_MAINWINDOW_HPP
 
-#include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QWidget>
+
+class QStackedWidget;
+class QPushButton;
 
 namespace ui
 {
 class UserInfoPage;
 class MainMenuPage;
 
-class MainWindow final: public QStackedWidget
+class MainWindow final: public QWidget
 {
 Q_OBJECT
 
@@ -17,10 +20,15 @@ public:
 
 private slots:
     void showMainMenu();
+    void adjustButtonBar();
 
 private:
+    QStackedWidget *stackedWidget;
     UserInfoPage *userInfoPage;
     MainMenuPage *mainMenuPage;
+
+    QPushButton *mainMenuButton;
+    QPushButton *quitButton;
 };
 }
 

@@ -20,9 +20,11 @@ FetchContent_MakeAvailable(spdlog DocTest)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
 add_library(EyeTrackingV2_impl STATIC
+        resources/resources.qrc
         src/Exceptions.cpp src/Exceptions.hpp
         src/Config.cpp src/Config.hpp
         src/config/General.cpp src/config/General.hpp

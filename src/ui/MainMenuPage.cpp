@@ -12,7 +12,7 @@ struct MainMenuPagePrivate final
     void setupUi(MainMenuPage *self)
     {
         ui.setupUi(self);
-        QObject::connect(ui.quitButton, &QPushButton::clicked, self, &MainMenuPage::quitClicked);
+
     }
 };
 
