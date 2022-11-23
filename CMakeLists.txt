@@ -39,6 +39,7 @@ add_library(EyeTrackingV2_impl STATIC
         src/ui/MainMenuPage.cpp src/ui/MainMenuPage.hpp src/ui/MainMenuPage.ui
         src/ui/UserInfoPage.cpp src/ui/UserInfoPage.hpp src/ui/UserInfoPage.ui
         src/ui/MainWindow.cpp src/ui/MainWindow.hpp
+        src/ui/zoom_maps/ZoomMapsInfoPage.cpp src/ui/zoom_maps/ZoomMapsInfoPage.hpp
         src/Constants.hpp)
 target_include_directories(EyeTrackingV2_impl INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_link_libraries(EyeTrackingV2_impl PUBLIC Qt5::Core Qt5::Gui Qt5::Widgets spdlog::spdlog)

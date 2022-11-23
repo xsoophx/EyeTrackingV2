@@ -10,6 +10,10 @@ namespace ui
 {
 class UserInfoPage;
 class MainMenuPage;
+namespace zoom_maps
+{
+class ZoomMapsInfoPage;
+}
 
 class MainWindow final: public QWidget
 {
@@ -21,11 +25,13 @@ public:
 private slots:
     void showMainMenu();
     void adjustButtonBar();
+    void showZoomMaps();
 
 private:
     QStackedWidget *stackedWidget;
     UserInfoPage *userInfoPage;
     MainMenuPage *mainMenuPage;
+    zoom_maps::ZoomMapsInfoPage *zoomMapsInfoPage;
 
     QPushButton *mainMenuButton;
     QPushButton *quitButton;

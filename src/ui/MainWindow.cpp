@@ -1,6 +1,7 @@
 #include "MainWindow.hpp"
 #include "MainMenuPage.hpp"
 #include "UserInfoPage.hpp"
+#include "zoom_maps/ZoomMapsInfoPage.hpp"
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QStackedWidget>
@@ -25,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
     mainMenuPage = new MainMenuPage{stackedWidget};
     stackedWidget->addWidget(mainMenuPage);
 
+    zoomMapsInfoPage = new zoom_maps::ZoomMapsInfoPage{stackedWidget};
+    stackedWidget->addWidget(zoomMapsInfoPage);
+
     stackedWidget->setCurrentWidget(userInfoPage);
 
     mainMenuButton = new QPushButton{tr("Main Menu"), this};
@@ -39,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(quitButton, &QPushButton::clicked, this, &MainWindow::close);
     connect(mainMenuButton, &QPushButton::clicked, this, &MainWindow::showMainMenu);
     connect(stackedWidget, &QStackedWidget::currentChanged, this, &MainWindow::adjustButtonBar);
+    connect(mainMenuPage, &MainMenuPage::zoomMapsClicked, this, &MainWindow::showZoomMaps);
 
     adjustButtonBar();
 }
@@ -52,5 +57,10 @@ void MainWindow::adjustButtonBar()
 {
     auto const currentWidget = stackedWidget->currentWidget();
     mainMenuButton->setDisabled(currentWidget == userInfoPage || currentWidget == mainMenuPage);
+}
+void MainWindow::showZoomMaps()
+{
+    stackedWidget->setCurrentWidget(zoomMapsInfoPage);
+
 }
 }

@@ -12,6 +12,7 @@ struct MainMenuPagePrivate final
     void setupUi(MainMenuPage *self)
     {
         ui.setupUi(self);
+        QObject::connect(ui.zoomMapsButton, &QPushButton::clicked, self, &MainMenuPage::zoomMapsClicked);
 
     }
 };

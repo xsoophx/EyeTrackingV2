@@ -16,6 +16,9 @@ Q_OBJECT
 public:
     explicit MainMenuPage(QWidget *parent = nullptr);
     ~MainMenuPage() noexcept override;
+signals:
+    void zoomMapsClicked();
+
 
 protected:
     void changeEvent(QEvent *event) override;
