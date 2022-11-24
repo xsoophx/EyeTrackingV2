@@ -13,6 +13,7 @@ class MainMenuPage;
 namespace zoom_maps
 {
 class ZoomMapsInfoPage;
+class ZoomMapsPage;
 }
 
 class MainWindow final: public QWidget
@@ -25,6 +26,7 @@ public:
 private slots:
     void showMainMenu();
     void adjustButtonBar();
+    void showZoomMapsInfo();
     void showZoomMaps();
 
 private:
@@ -32,6 +34,7 @@ private:
     UserInfoPage *userInfoPage;
     MainMenuPage *mainMenuPage;
     zoom_maps::ZoomMapsInfoPage *zoomMapsInfoPage;
+    zoom_maps::ZoomMapsPage *zoomMapsPage;
 
     QPushButton *mainMenuButton;
     QPushButton *quitButton;

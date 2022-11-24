@@ -12,6 +12,9 @@ Q_OBJECT
 public:
     explicit ZoomMapsInfoPage(QWidget *parent = nullptr);
 
+signals:
+    void startButtonClicked();
+
 };
 }
 
